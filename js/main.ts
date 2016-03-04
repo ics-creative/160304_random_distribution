@@ -15,7 +15,7 @@ namespace demo {
 
 		static GRAPH_WIDTH:number = 400;
 		static GRAPH_HEIGHT:number = 400;
-		static NUM_LOGIC:number = 4;
+		static NUM_LOGIC:number = 6;
 
 		private stage:createjs.Stage;
 		private graphContainer:createjs.Container;
@@ -42,13 +42,13 @@ namespace demo {
 			const btnNext = <HTMLElement>document.getElementById("btnNext");
 			btnNext.addEventListener("click", ()=> {
 				this.selectBox.selectedIndex += 1;
-				if (this.selectBox.selectedIndex > Main.NUM_LOGIC) this.selectBox.selectedIndex = 0;
+				if (this.selectBox.selectedIndex >= Main.NUM_LOGIC) this.selectBox.selectedIndex = 0;
 				this.onSelect(null);
 			});
 			const btnPrev = <HTMLElement>document.getElementById("btnPrev");
 			btnPrev.addEventListener("click", ()=> {
 				this.selectBox.selectedIndex -= 1;
-				if (this.selectBox.selectedIndex < 0) this.selectBox.selectedIndex = Main.NUM_LOGIC;
+				if (this.selectBox.selectedIndex < 0) this.selectBox.selectedIndex = Main.NUM_LOGIC - 1;
 				this.onSelect(null);
 			});
 

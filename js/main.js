@@ -25,7 +25,7 @@ var demo;
             var btnNext = document.getElementById("btnNext");
             btnNext.addEventListener("click", function () {
                 _this.selectBox.selectedIndex += 1;
-                if (_this.selectBox.selectedIndex > Main.NUM_LOGIC)
+                if (_this.selectBox.selectedIndex >= Main.NUM_LOGIC)
                     _this.selectBox.selectedIndex = 0;
                 _this.onSelect(null);
             });
@@ -33,7 +33,7 @@ var demo;
             btnPrev.addEventListener("click", function () {
                 _this.selectBox.selectedIndex -= 1;
                 if (_this.selectBox.selectedIndex < 0)
-                    _this.selectBox.selectedIndex = Main.NUM_LOGIC;
+                    _this.selectBox.selectedIndex = Main.NUM_LOGIC - 1;
                 _this.onSelect(null);
             });
             // Stageオブジェクトを作成します
@@ -162,7 +162,7 @@ var demo;
         };
         Main.GRAPH_WIDTH = 400;
         Main.GRAPH_HEIGHT = 400;
-        Main.NUM_LOGIC = 4;
+        Main.NUM_LOGIC = 6;
         return Main;
     })();
 })(demo || (demo = {}));
