@@ -14,13 +14,25 @@
     body {
       margin: 0;
       padding: 0;
-      background-image: url("images/graph.png");
-      background-repeat: no-repeat;
     }
 
-    #containerStats {
-      position: absolute;
+    .graff {
+      width: 960px;
+      height: 540px;
+      background-image: url("images/graph.png");
+      background-repeat: no-repeat;
+      display: flex;
+      -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
+      align-items: center; /* 縦方向中央揃え */
+      -webkit-justify-content: center; /* 横方向中央揃え（Safari用） */
+      justify-content: center; /* 横方向中央揃え */
     }
+
+    #myCanvas {
+      width: 480px;
+      height: 480px;
+    }
+
   </style>
 </head>
 <body>
@@ -34,7 +46,9 @@
       <option>normalRandom</option>
     </select>
   </form>
-  <div id="containerStats"></div>
-  <canvas id="myCanvas" width="500" height="500"></canvas>
+
+  <div class="graff">
+    <canvas id="myCanvas" width="480" height="480"></canvas>
+  </div>
 </body>
 </html>
