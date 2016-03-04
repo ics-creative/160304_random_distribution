@@ -54,7 +54,7 @@ namespace demo {
 
 		private handleTick():void {
 			if (this._calc) {
-				for (var i:number = 0; i < 500; i++) {
+				for (let i:number = 0; i < 500; i++) {
 					this.addValue(this.randomFunc());
 					if (this._isMax == true) {    // どこかが一番上まで行ったら
 						this._calc = false;    // 計算ループ終了
@@ -98,37 +98,51 @@ namespace demo {
 		//
 
 		private random():number {
-			return Math.random();
+			// 通常の乱数
+			const value = Math.random();
+			return value;
 		}
 
 		private addRandom():number {
-			return (Math.random() + Math.random()) / 2;
+			// 加算の乱数
+			const value = (Math.random() + Math.random()) / 2;
+
+			return value;
 		}
 
 		private multiplyRandom():number {
-			var r:number = Math.random();
-			return r * r;
+			// 乗算の乱数
+			const r:number = Math.random();
+			const value = r * r;
+
+			return value;
 		}
 
 		private squareRandom():number {
-			return Math.random() * Math.random();
+			// 2乗の乱数
+			const value = Math.random() * Math.random();
+			return value;
 		}
 
 		private sqrtRandom():number {
-			return Math.sqrt(Math.random());
+			// 平方根の乱数
+			const value = Math.sqrt(Math.random());
+
+			return value;
 		}
 
 		private normalRandom():number {
-			var r1:number = Math.random();
-			var r2:number = Math.random();
-			var normal = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
-			return normal;
+			// 正規乱数
+			const r1:number = Math.random();
+			const r2:number = Math.random();
+			const value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+			return value;
 		}
 
 		private createGraph() {
 			this._markerList = [];
-			for (var i:number = 0; i < Main.GRAPH_WIDTH; i++) {
-				var marker:createjs.Shape = new createjs.Shape();
+			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
+				const marker:createjs.Shape = new createjs.Shape();
 				marker.graphics.beginFill(createjs.Graphics.getHSL(Math.random() * 360, 90, 40));
 				marker.graphics.drawCircle(0, 0, 3);
 				this._markerList.push(marker);
@@ -142,19 +156,19 @@ namespace demo {
 		private reset():void {
 			this._isMax = false;
 			this._valueList = [];
-			for (var i:number = 0; i < Main.GRAPH_WIDTH; i++) {
+			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
 				this._valueList.push(0);
 
-				var marker:createjs.Shape = this._markerList[i];
+				const marker:createjs.Shape = this._markerList[i];
 				marker.y = Main.GRAPH_HEIGHT - this._valueList[i];
 			}
 		}
 
 		private addValue(value:number):void {
-			var num:number = Math.floor(value * Main.GRAPH_WIDTH);
+			const num:number = Math.floor(value * Main.GRAPH_WIDTH);
 			this._valueList[num] += this._rate;
 
-			var marker:createjs.Shape = this._markerList[num];
+			const marker:createjs.Shape = this._markerList[num];
 			marker.y = Main.GRAPH_HEIGHT - this._valueList[num];
 
 			if (Main.GRAPH_HEIGHT <= this._valueList[num]) {
