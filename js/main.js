@@ -113,15 +113,23 @@ var demo;
             return value;
         };
         Main.prototype.calcNormalRandom = function () {
-            // 正規乱数
-            var r1 = Math.random();
-            var r2 = Math.random();
-            var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
-            // 値を0以上1未満になるよう正規化する
-            value = (value + 3) / 6;
-            if (value < 0 || value >= 1) {
-                // 値が範囲を超えてしまう可能性があるため、その場合は再計算する
-                value = this.calcNormalRandom();
+            function calcNormal() {
+                // 正規乱数
+                var r1 = Math.random();
+                var r2 = Math.random();
+                var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+                // 値を0以上1未満になるよう正規化する
+                value = (value + 3) / 6;
+                return value;
+            }
+            // 0.0未満、1.0以上になるケースがあるため
+            // その時は再計算を行う
+            var value;
+            while (true) {
+                value = calcNormal();
+                if (0 <= value && value < 1) {
+                    break;
+                }
             }
             return value;
         };
