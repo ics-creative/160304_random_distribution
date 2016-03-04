@@ -18,14 +18,14 @@ namespace demo {
 		private stage:createjs.Stage;
 		private graphContainer:createjs.Container;
 		private selectBox:HTMLSelectElement;
-		private randomFunc:Function;
+		private currentRandomFunc:Function;
 
 		private _rate:number = 2;
 		private _isMax:boolean = false;
 
 		private _valueList:number[];
 		private _markerList:createjs.Shape[];
-		private _calc:boolean = false;
+		private _isCalculating:boolean = false;
 
 		constructor() {
 			this.init();
@@ -53,11 +53,11 @@ namespace demo {
 		}
 
 		private handleTick():void {
-			if (this._calc) {
-				for (let i:number = 0; i < 500; i++) {
-					this.addValue(this.randomFunc());
-					if (this._isMax == true) {    // どこかが一番上まで行ったら
-						this._calc = false;    // 計算ループ終了
+			if (this._isCalculating == true) {
+				for (let i:number = 0; i < 1000; i++) {
+					this.addValue(this.currentRandomFunc());
+					if (this._isMax == true) { // どこかが一番上まで行ったら
+						this._isCalculating = false; // 計算ループ終了
 						break;
 					}
 				}
@@ -69,22 +69,22 @@ namespace demo {
 		private onSelect(event:any):void {
 			switch (this.selectBox.selectedIndex) {
 				case 0:
-					this.randomFunc = this.random;
+					this.currentRandomFunc = this.calcRandom;
 					break;
 				case 1:
-					this.randomFunc = this.addRandom;
+					this.currentRandomFunc = this.calcAddRandom;
 					break;
 				case 2:
-					this.randomFunc = this.multiplyRandom;
+					this.currentRandomFunc = this.calcMultiplyRandom;
 					break;
 				case 3:
-					this.randomFunc = this.sqrtRandom;
+					this.currentRandomFunc = this.calcSqrtRandom;
 					break;
 				case 4:
-					this.randomFunc = this.sqrtRandom;
+					this.currentRandomFunc = this.calcSqrtRandom;
 					break;
 				case 5:
-					this.randomFunc = this.normalRandom;
+					this.currentRandomFunc = this.calcNormalRandom;
 					break;
 				default:
 					break;
@@ -92,25 +92,25 @@ namespace demo {
 			}
 
 			this.reset();
-			this._calc = true;
+			this._isCalculating = true;
 		}
 
 		//
 
-		private random():number {
+		private calcRandom():number {
 			// 通常の乱数
 			const value = Math.random();
 			return value;
 		}
 
-		private addRandom():number {
+		private calcAddRandom():number {
 			// 加算の乱数
 			const value = (Math.random() + Math.random()) / 2;
 
 			return value;
 		}
 
-		private multiplyRandom():number {
+		private calcMultiplyRandom():number {
 			// 乗算の乱数
 			const r:number = Math.random();
 			const value = r * r;
@@ -124,14 +124,14 @@ namespace demo {
 			return value;
 		}
 
-		private sqrtRandom():number {
+		private calcSqrtRandom():number {
 			// 平方根の乱数
 			const value = Math.sqrt(Math.random());
 
 			return value;
 		}
 
-		private normalRandom():number {
+		private calcNormalRandom():number {
 			// 正規乱数
 			const r1:number = Math.random();
 			const r2:number = Math.random();
@@ -143,8 +143,13 @@ namespace demo {
 			this._markerList = [];
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
 				const marker:createjs.Shape = new createjs.Shape();
-				marker.graphics.beginFill(createjs.Graphics.getHSL(Math.random() * 360, 90, 40));
-				marker.graphics.drawCircle(0, 0, 3);
+				marker.graphics
+					.beginFill(createjs.Graphics.getHSL(50 * i / Main.GRAPH_WIDTH + 190, 90, 60))
+					.drawCircle(0, 0, 2)
+					.endFill()
+					.beginFill(createjs.Graphics.getHSL(50 * i / Main.GRAPH_WIDTH + 190, 90, 60, 0.2))
+					.drawCircle(0, 0, 5)
+					.endFill()
 				this._markerList.push(marker);
 				this.graphContainer.addChild(marker);
 				marker.x = i;
