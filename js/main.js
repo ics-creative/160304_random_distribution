@@ -64,6 +64,9 @@ var Main = (function () {
     Main.prototype.random = function () {
         return Math.random();
     };
+    Main.prototype.addRandom = function () {
+        return (Math.random() + Math.random()) / 2;
+    };
     Main.prototype.multiplyRandom = function () {
         var r = Math.random();
         return r * r;
@@ -73,9 +76,6 @@ var Main = (function () {
     };
     Main.prototype.sqrtRandom = function () {
         return Math.sqrt(Math.random());
-    };
-    Main.prototype.addRandom = function () {
-        return (Math.random() + Math.random()) / 2;
     };
     Main.prototype.normalRandom = function () {
         var r1 = Math.random();
@@ -124,4 +124,4 @@ var Main = (function () {
 })();
 ;
 window.addEventListener("load", function () { new Main(); });
-//# sourceMappingURL=test.js.map
+//# sourceMappingURL=main.js.map
