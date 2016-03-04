@@ -12,8 +12,9 @@ namespace demo {
 	 * ランダムアルゴリズムの可視化デモのクラスです。
 	 */
 	class Main {
-		static GRAPH_WIDTH:number = 480;
-		static GRAPH_HEIGHT:number = 480;
+
+		static GRAPH_WIDTH:number = 400;
+		static GRAPH_HEIGHT:number = 400;
 
 		private stage:createjs.Stage;
 		private graphContainer:createjs.Container;
@@ -144,11 +145,11 @@ namespace demo {
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
 				const marker:createjs.Shape = new createjs.Shape();
 				marker.graphics
-					.beginFill(createjs.Graphics.getHSL(50 * i / Main.GRAPH_WIDTH + 190, 90, 60))
-					.drawCircle(0, 0, 2)
+					.beginFill(createjs.Graphics.getHSL(40 * i / Main.GRAPH_WIDTH + 180, 100, 50 + 10 * i / Main.GRAPH_WIDTH))
+					.drawRect(-2, -2, 4, 4)
 					.endFill()
-					.beginFill(createjs.Graphics.getHSL(50 * i / Main.GRAPH_WIDTH + 190, 90, 60, 0.2))
-					.drawCircle(0, 0, 5)
+					.beginFill(createjs.Graphics.getHSL(40 * i / Main.GRAPH_WIDTH + 180, 100, 50, 0.2))
+					.drawRect(-6, -6, 12, 12)
 					.endFill()
 				this._markerList.push(marker);
 				this.graphContainer.addChild(marker);

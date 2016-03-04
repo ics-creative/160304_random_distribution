@@ -21,14 +21,13 @@
       height: 540px;
       background-image: url("images/graph.png");
       background-repeat: no-repeat;
-      display: flex;
-      -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
-      align-items: center; /* 縦方向中央揃え */
-      -webkit-justify-content: center; /* 横方向中央揃え（Safari用） */
-      justify-content: center; /* 横方向中央揃え */
+      position: relative;
     }
 
     #myCanvas {
+      position: absolute;
+      top: 18px;
+      left: 280px;
       width: 480px;
       height: 480px;
     }
