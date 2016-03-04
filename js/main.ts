@@ -94,7 +94,7 @@ namespace demo {
 					this.currentRandomFunc = this.calcMultiplyRandom;
 					break;
 				case 3:
-					this.currentRandomFunc = this.calcSqrtRandom;
+					this.currentRandomFunc = this.calcSquareRandom;
 					break;
 				case 4:
 					this.currentRandomFunc = this.calcSqrtRandom;
@@ -128,15 +128,15 @@ namespace demo {
 
 		private calcMultiplyRandom():number {
 			// 乗算の乱数
-			const r:number = Math.random();
-			const value = r * r;
-
+			const value = Math.random() * Math.random();
 			return value;
 		}
 
-		private squareRandom():number {
+		private calcSquareRandom():number {
 			// 2乗の乱数
-			const value = Math.random() * Math.random();
+			const r:number = Math.random();
+			const value = r * r;
+
 			return value;
 		}
 
@@ -151,7 +151,17 @@ namespace demo {
 			// 正規乱数
 			const r1:number = Math.random();
 			const r2:number = Math.random();
-			const value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+			var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+
+			// 値を0以上1未満になるよう正規化する
+			value = (value + 3) / 6;
+
+			if(value < 0 || value >= 1)
+			{
+				// 値が範囲を超えてしまう可能性があるため、その場合は再計算する
+				value = this.calcNormalRandom();
+			}
+
 			return value;
 		}
 

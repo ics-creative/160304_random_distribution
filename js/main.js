@@ -71,7 +71,7 @@ var demo;
                     this.currentRandomFunc = this.calcMultiplyRandom;
                     break;
                 case 3:
-                    this.currentRandomFunc = this.calcSqrtRandom;
+                    this.currentRandomFunc = this.calcSquareRandom;
                     break;
                 case 4:
                     this.currentRandomFunc = this.calcSqrtRandom;
@@ -98,13 +98,13 @@ var demo;
         };
         Main.prototype.calcMultiplyRandom = function () {
             // 乗算の乱数
-            var r = Math.random();
-            var value = r * r;
+            var value = Math.random() * Math.random();
             return value;
         };
-        Main.prototype.squareRandom = function () {
+        Main.prototype.calcSquareRandom = function () {
             // 2乗の乱数
-            var value = Math.random() * Math.random();
+            var r = Math.random();
+            var value = r * r;
             return value;
         };
         Main.prototype.calcSqrtRandom = function () {
@@ -117,6 +117,12 @@ var demo;
             var r1 = Math.random();
             var r2 = Math.random();
             var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+            // 値を0以上1未満になるよう正規化する
+            value = (value + 3) / 6;
+            if (value < 0 || value >= 1) {
+                // 値が範囲を超えてしまう可能性があるため、その場合は再計算する
+                value = this.calcNormalRandom();
+            }
             return value;
         };
         Main.prototype.createGraph = function () {
