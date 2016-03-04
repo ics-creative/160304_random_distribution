@@ -15,6 +15,7 @@ namespace demo {
 
 		static GRAPH_WIDTH:number = 400;
 		static GRAPH_HEIGHT:number = 400;
+		static NUM_LOGIC:number = 4;
 
 		private stage:createjs.Stage;
 		private graphContainer:createjs.Container;
@@ -37,6 +38,20 @@ namespace demo {
 			this.selectBox.addEventListener("change", (event) => {
 				this.onSelect(event);
 			});
+
+			const btnNext = <HTMLElement>document.getElementById("btnNext");
+			btnNext.addEventListener("click", ()=> {
+				this.selectBox.selectedIndex += 1;
+				if (this.selectBox.selectedIndex > Main.NUM_LOGIC) this.selectBox.selectedIndex = 0;
+				this.onSelect(null);
+			});
+			const btnPrev = <HTMLElement>document.getElementById("btnPrev");
+			btnPrev.addEventListener("click", ()=> {
+				this.selectBox.selectedIndex -= 1;
+				if (this.selectBox.selectedIndex < 0) this.selectBox.selectedIndex = Main.NUM_LOGIC;
+				this.onSelect(null);
+			});
+
 			// Stageオブジェクトを作成します
 			this.stage = new createjs.Stage("myCanvas");
 

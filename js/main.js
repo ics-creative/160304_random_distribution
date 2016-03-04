@@ -22,6 +22,20 @@ var demo;
             this.selectBox.addEventListener("change", function (event) {
                 _this.onSelect(event);
             });
+            var btnNext = document.getElementById("btnNext");
+            btnNext.addEventListener("click", function () {
+                _this.selectBox.selectedIndex += 1;
+                if (_this.selectBox.selectedIndex > Main.NUM_LOGIC)
+                    _this.selectBox.selectedIndex = 0;
+                _this.onSelect(null);
+            });
+            var btnPrev = document.getElementById("btnPrev");
+            btnPrev.addEventListener("click", function () {
+                _this.selectBox.selectedIndex -= 1;
+                if (_this.selectBox.selectedIndex < 0)
+                    _this.selectBox.selectedIndex = Main.NUM_LOGIC;
+                _this.onSelect(null);
+            });
             // Stageオブジェクトを作成します
             this.stage = new createjs.Stage("myCanvas");
             this.graphContainer = new createjs.Container();
@@ -142,6 +156,7 @@ var demo;
         };
         Main.GRAPH_WIDTH = 400;
         Main.GRAPH_HEIGHT = 400;
+        Main.NUM_LOGIC = 4;
         return Main;
     })();
 })(demo || (demo = {}));

@@ -1,53 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="UTF-8">
-  <title>Ranom Distribution Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Random Distribution Demo - ICS</title>
   <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
   <script src="js/main.js"></script>
-  <style type="text/css">
-    html {
-      overflow: hidden;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .graff {
-      width: 960px;
-      height: 540px;
-      background-image: url("images/graph.png");
-      background-repeat: no-repeat;
-      position: relative;
-    }
-
-    #myCanvas {
-      position: absolute;
-      top: 18px;
-      left: 280px;
-      width: 480px;
-      height: 480px;
-    }
-
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <form>
-    <select id="selectBox">
-      <option>random</option>
-      <option>addRandom</option>
-      <option>multiplyRandom</option>
-      <option>squareRandom</option>
-      <option>sqrtRandom</option>
-      <option>normalRandom</option>
-    </select>
-  </form>
+
 
   <div class="graff">
     <canvas id="myCanvas" width="480" height="480"></canvas>
+    <div id="ui">
+      <div id="numParticle">
+        <select id="selectBox">
+          <option>random</option>
+          <option>addRandom</option>
+          <option>multiplyRandom</option>
+          <option>squareRandom</option>
+          <option>sqrtRandom</option>
+          <option>normalRandom</option>
+        </select>
+      </div>
+      <div id="btnPrev">&laquo;</div>
+      <div id="btnNext">&raquo;</div>
+    </div>
   </div>
 </body>
 </html>
