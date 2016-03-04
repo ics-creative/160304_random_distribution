@@ -25,7 +25,7 @@ var demo;
             var btnNext = document.getElementById("btnNext");
             btnNext.addEventListener("click", function () {
                 _this.selectBox.selectedIndex += 1;
-                if (_this.selectBox.selectedIndex > Main.NUM_LOGIC)
+                if (_this.selectBox.selectedIndex >= Main.NUM_LOGIC)
                     _this.selectBox.selectedIndex = 0;
                 _this.onSelect(null);
             });
@@ -33,7 +33,7 @@ var demo;
             btnPrev.addEventListener("click", function () {
                 _this.selectBox.selectedIndex -= 1;
                 if (_this.selectBox.selectedIndex < 0)
-                    _this.selectBox.selectedIndex = Main.NUM_LOGIC;
+                    _this.selectBox.selectedIndex = Main.NUM_LOGIC - 1;
                 _this.onSelect(null);
             });
             // Stageオブジェクトを作成します
@@ -71,7 +71,7 @@ var demo;
                     this.currentRandomFunc = this.calcMultiplyRandom;
                     break;
                 case 3:
-                    this.currentRandomFunc = this.calcSqrtRandom;
+                    this.currentRandomFunc = this.calcSquareRandom;
                     break;
                 case 4:
                     this.currentRandomFunc = this.calcSqrtRandom;
@@ -102,7 +102,7 @@ var demo;
             var value = r * r;
             return value;
         };
-        Main.prototype.squareRandom = function () {
+        Main.prototype.calcSquareRandom = function () {
             // 2乗の乱数
             var value = Math.random() * Math.random();
             return value;
@@ -156,7 +156,7 @@ var demo;
         };
         Main.GRAPH_WIDTH = 400;
         Main.GRAPH_HEIGHT = 400;
-        Main.NUM_LOGIC = 4;
+        Main.NUM_LOGIC = 6;
         return Main;
     })();
 })(demo || (demo = {}));
