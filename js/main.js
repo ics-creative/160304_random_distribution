@@ -11,13 +11,10 @@ var demo;
      */
     var Main = (function () {
         function Main() {
-            this._rate = 2;
-            this._isMax = false;
-            this._isCalculating = false;
-            this.init();
-        }
-        Main.prototype.init = function () {
             var _this = this;
+            this._speed = 2;
+            this._isPeak = false;
+            this._isCalculating = false;
             this.selectBox = document.getElementById("selectBox");
             this.selectBox.addEventListener("change", function (event) {
                 _this.onSelect(event);
@@ -49,12 +46,12 @@ var demo;
                 _this.handleTick();
             });
             this.onSelect(null);
-        };
+        }
         Main.prototype.handleTick = function () {
             if (this._isCalculating == true) {
                 for (var i = 0; i < 1000; i++) {
                     this.addValue(this.currentRandomFunc());
-                    if (this._isMax == true) {
+                    if (this._isPeak == true) {
                         this._isCalculating = false; // 計算ループ終了
                         break;
                     }
@@ -63,7 +60,6 @@ var demo;
             this.stage.update();
         };
         Main.prototype.onSelect = function (event) {
-            console.log(this.selectBox.value);
             switch (this.selectBox.value) {
                 case "default":
                     this.currentRandomFunc = this.calcRandom;
@@ -173,7 +169,7 @@ var demo;
             return value;
         };
         Main.prototype.createGraph = function () {
-            this._markerList = [];
+            this._dotArray = [];
             for (var i = 0; i < Main.GRAPH_WIDTH; i++) {
                 var marker = new createjs.Shape();
                 marker.graphics
@@ -183,28 +179,28 @@ var demo;
                     .beginFill(createjs.Graphics.getHSL(40 * i / Main.GRAPH_WIDTH + 180, 100, 50, 0.2))
                     .drawRect(-6, -6, 12, 12)
                     .endFill();
-                this._markerList.push(marker);
+                this._dotArray.push(marker);
                 this.graphContainer.addChild(marker);
                 marker.x = i;
             }
             this.reset();
         };
         Main.prototype.reset = function () {
-            this._isMax = false;
-            this._valueList = [];
+            this._isPeak = false;
+            this._valueArray = [];
             for (var i = 0; i < Main.GRAPH_WIDTH; i++) {
-                this._valueList.push(0);
-                var marker = this._markerList[i];
-                marker.y = Main.GRAPH_HEIGHT - this._valueList[i];
+                this._valueArray.push(0);
+                var marker = this._dotArray[i];
+                marker.y = Main.GRAPH_HEIGHT - this._valueArray[i];
             }
         };
         Main.prototype.addValue = function (value) {
             var num = Math.floor(value * Main.GRAPH_WIDTH);
-            this._valueList[num] += this._rate;
-            var marker = this._markerList[num];
-            marker.y = Main.GRAPH_HEIGHT - this._valueList[num];
-            if (Main.GRAPH_HEIGHT <= this._valueList[num]) {
-                this._isMax = true;
+            this._valueArray[num] += this._speed;
+            var marker = this._dotArray[num];
+            marker.y = Main.GRAPH_HEIGHT - this._valueArray[num];
+            if (Main.GRAPH_HEIGHT <= this._valueArray[num]) {
+                this._isPeak = true;
             }
         };
         Main.GRAPH_WIDTH = 400;

@@ -21,18 +21,14 @@ namespace demo {
 		private selectBox:HTMLSelectElement;
 		private currentRandomFunc:Function;
 
-		private _rate:number = 2;
-		private _isMax:boolean = false;
+		private _speed:number = 2;
+		private _isPeak:boolean = false;
 
-		private _valueList:number[];
-		private _markerList:createjs.Shape[];
+		private _valueArray:number[];
+		private _dotArray:createjs.Shape[];
 		private _isCalculating:boolean = false;
 
 		constructor() {
-			this.init();
-		}
-
-		private init():void {
 			this.selectBox = <HTMLSelectElement>document.getElementById("selectBox");
 			this.selectBox.addEventListener("change", (event) => {
 				this.onSelect(event);
@@ -74,7 +70,7 @@ namespace demo {
 			if (this._isCalculating == true) {
 				for (let i:number = 0; i < 1000; i++) {
 					this.addValue(this.currentRandomFunc());
-					if (this._isMax == true) { // どこかが一番上まで行ったら
+					if (this._isPeak == true) { // どこかが一番上まで行ったら
 						this._isCalculating = false; // 計算ループ終了
 						break;
 					}
@@ -85,7 +81,6 @@ namespace demo {
 
 
 		private onSelect(event:any):void {
-			console.log(this.selectBox.value)
 			switch (this.selectBox.value) {
 				case "default":
 					this.currentRandomFunc = this.calcRandom;
@@ -216,7 +211,7 @@ namespace demo {
 		}
 
 		private createGraph() {
-			this._markerList = [];
+			this._dotArray = [];
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
 				const marker:createjs.Shape = new createjs.Shape();
 				marker.graphics
@@ -226,7 +221,7 @@ namespace demo {
 					.beginFill(createjs.Graphics.getHSL(40 * i / Main.GRAPH_WIDTH + 180, 100, 50, 0.2))
 					.drawRect(-6, -6, 12, 12)
 					.endFill()
-				this._markerList.push(marker);
+				this._dotArray.push(marker);
 				this.graphContainer.addChild(marker);
 				marker.x = i;
 			}
@@ -235,25 +230,25 @@ namespace demo {
 		}
 
 		private reset():void {
-			this._isMax = false;
-			this._valueList = [];
+			this._isPeak = false;
+			this._valueArray = [];
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
-				this._valueList.push(0);
+				this._valueArray.push(0);
 
-				const marker = this._markerList[i];
-				marker.y = Main.GRAPH_HEIGHT - this._valueList[i];
+				const marker = this._dotArray[i];
+				marker.y = Main.GRAPH_HEIGHT - this._valueArray[i];
 			}
 		}
 
 		private addValue(value:number):void {
 			const num:number = Math.floor(value * Main.GRAPH_WIDTH);
-			this._valueList[num] += this._rate;
+			this._valueArray[num] += this._speed;
 
-			const marker:createjs.Shape = this._markerList[num];
-			marker.y = Main.GRAPH_HEIGHT - this._valueList[num];
+			const marker:createjs.Shape = this._dotArray[num];
+			marker.y = Main.GRAPH_HEIGHT - this._valueArray[num];
 
-			if (Main.GRAPH_HEIGHT <= this._valueList[num]) {
-				this._isMax = true;
+			if (Main.GRAPH_HEIGHT <= this._valueArray[num]) {
+				this._isPeak = true;
 			}
 		}
 	}
