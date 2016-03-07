@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=960, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=960, initial-scale=1">
   <title>Random Distribution Demo - ICS</title>
   <script src="https://code.createjs.com/createjs-2015.11.26.min.js" defer></script>
   <script src="js/main.js" defer></script>
@@ -14,12 +14,15 @@
     <div id="ui">
       <div id="numParticle">
         <select id="selectBox">
-          <option>random</option>
-          <option>addRandom</option>
-          <option>multiplyRandom</option>
-          <option>squareRandom</option>
-          <option>sqrtRandom</option>
-          <option>normalRandom</option>
+          <option value="default">通常の乱数</option>
+          <option value="add">乱数の加算</option>
+          <option value="multiply">乱数の乗算</option>
+          <option value="multiply-inverse">乱数の乗算(反転)</option>
+          <option value="square">乱数の2乗</option>
+          <option value="square-inverse">乱数の2乗(反転)</option>
+          <option value="sqrt">乱数の平方根</option>
+          <option value="sqrt-inverse">乱数の平方根(反転)</option>
+          <option value="normal">正規乱数</option>
         </select>
       </div>
       <div id="btnPrev">&laquo;</div>

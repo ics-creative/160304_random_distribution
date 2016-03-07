@@ -15,7 +15,6 @@ namespace demo {
 
 		static GRAPH_WIDTH:number = 400;
 		static GRAPH_HEIGHT:number = 400;
-		static NUM_LOGIC:number = 6;
 
 		private stage:createjs.Stage;
 		private graphContainer:createjs.Container;
@@ -41,14 +40,17 @@ namespace demo {
 
 			const btnNext = <HTMLElement>document.getElementById("btnNext");
 			btnNext.addEventListener("click", ()=> {
-				this.selectBox.selectedIndex += 1;
-				if (this.selectBox.selectedIndex >= Main.NUM_LOGIC) this.selectBox.selectedIndex = 0;
+				if (this.selectBox.selectedIndex >= this.selectBox.length - 1) {
+					this.selectBox.selectedIndex = 0;
+				} else {
+					this.selectBox.selectedIndex += 1;
+				}
 				this.onSelect(null);
 			});
 			const btnPrev = <HTMLElement>document.getElementById("btnPrev");
 			btnPrev.addEventListener("click", ()=> {
 				this.selectBox.selectedIndex -= 1;
-				if (this.selectBox.selectedIndex < 0) this.selectBox.selectedIndex = Main.NUM_LOGIC - 1;
+				if (this.selectBox.selectedIndex < 0) this.selectBox.selectedIndex = this.selectBox.length - 1;
 				this.onSelect(null);
 			});
 
@@ -83,35 +85,43 @@ namespace demo {
 
 
 		private onSelect(event:any):void {
-			switch (this.selectBox.selectedIndex) {
-				case 0:
+			console.log(this.selectBox.value)
+			switch (this.selectBox.value) {
+				case "default":
 					this.currentRandomFunc = this.calcRandom;
 					break;
-				case 1:
+				case "add":
 					this.currentRandomFunc = this.calcAddRandom;
 					break;
-				case 2:
+				case "multiply":
 					this.currentRandomFunc = this.calcMultiplyRandom;
 					break;
-				case 3:
+				case "multiply-inverse":
+					this.currentRandomFunc = this.calcMultiplyInverse;
+					break;
+				case "square":
 					this.currentRandomFunc = this.calcSquareRandom;
 					break;
-				case 4:
+				case "square-inverse":
+					this.currentRandomFunc = this.calcSquareInverse;
+					break;
+				case "sqrt":
 					this.currentRandomFunc = this.calcSqrtRandom;
 					break;
-				case 5:
+				case "sqrt-inverse":
+					this.currentRandomFunc = this.calcSqrtInverse;
+					break;
+				case "normal":
 					this.currentRandomFunc = this.calcNormalRandom;
 					break;
 				default:
 					break;
-
 			}
 
 			this.reset();
 			this._isCalculating = true;
 		}
 
-		//
 
 		private calcRandom():number {
 			// 通常の乱数
@@ -132,6 +142,14 @@ namespace demo {
 			return value;
 		}
 
+		private calcMultiplyInverse():number {
+			// 乗算の乱数
+			const base = Math.random() * Math.random();
+			// 反転
+			const value = 1.0 - base;
+			return value;
+		}
+
 		private calcSquareRandom():number {
 			// 2乗の乱数
 			const r:number = Math.random();
@@ -140,10 +158,27 @@ namespace demo {
 			return value;
 		}
 
+		private calcSquareInverse():number {
+			// 2乗の乱数
+			const r:number = Math.random();
+			const base = r * r;
+			// 反転
+			const value = 1.0 - base;
+			return value;
+		}
+
 		private calcSqrtRandom():number {
 			// 平方根の乱数
 			const value = Math.sqrt(Math.random());
 
+			return value;
+		}
+
+		private calcSqrtInverse():number {
+			// 平方根の乱数
+			const base = Math.sqrt(Math.random());
+			// 反転
+			const value = 1.0 - base;
 			return value;
 		}
 
@@ -173,6 +208,13 @@ namespace demo {
 			return value;
 		}
 
+		private calcInverse(randomValue:number):number {
+			// 平方根の乱数
+			const value = 1.0 - randomValue;
+
+			return value;
+		}
+
 		private createGraph() {
 			this._markerList = [];
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
@@ -198,7 +240,7 @@ namespace demo {
 			for (let i:number = 0; i < Main.GRAPH_WIDTH; i++) {
 				this._valueList.push(0);
 
-				const marker:createjs.Shape = this._markerList[i];
+				const marker = this._markerList[i];
 				marker.y = Main.GRAPH_HEIGHT - this._valueList[i];
 			}
 		}

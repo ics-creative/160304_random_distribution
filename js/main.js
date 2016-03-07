@@ -24,16 +24,19 @@ var demo;
             });
             var btnNext = document.getElementById("btnNext");
             btnNext.addEventListener("click", function () {
-                _this.selectBox.selectedIndex += 1;
-                if (_this.selectBox.selectedIndex >= Main.NUM_LOGIC)
+                if (_this.selectBox.selectedIndex >= _this.selectBox.length - 1) {
                     _this.selectBox.selectedIndex = 0;
+                }
+                else {
+                    _this.selectBox.selectedIndex += 1;
+                }
                 _this.onSelect(null);
             });
             var btnPrev = document.getElementById("btnPrev");
             btnPrev.addEventListener("click", function () {
                 _this.selectBox.selectedIndex -= 1;
                 if (_this.selectBox.selectedIndex < 0)
-                    _this.selectBox.selectedIndex = Main.NUM_LOGIC - 1;
+                    _this.selectBox.selectedIndex = _this.selectBox.length - 1;
                 _this.onSelect(null);
             });
             // Stageオブジェクトを作成します
@@ -60,23 +63,33 @@ var demo;
             this.stage.update();
         };
         Main.prototype.onSelect = function (event) {
-            switch (this.selectBox.selectedIndex) {
-                case 0:
+            console.log(this.selectBox.value);
+            switch (this.selectBox.value) {
+                case "default":
                     this.currentRandomFunc = this.calcRandom;
                     break;
-                case 1:
+                case "add":
                     this.currentRandomFunc = this.calcAddRandom;
                     break;
-                case 2:
+                case "multiply":
                     this.currentRandomFunc = this.calcMultiplyRandom;
                     break;
-                case 3:
+                case "multiply-inverse":
+                    this.currentRandomFunc = this.calcMultiplyInverse;
+                    break;
+                case "square":
                     this.currentRandomFunc = this.calcSquareRandom;
                     break;
-                case 4:
+                case "square-inverse":
+                    this.currentRandomFunc = this.calcSquareInverse;
+                    break;
+                case "sqrt":
                     this.currentRandomFunc = this.calcSqrtRandom;
                     break;
-                case 5:
+                case "sqrt-inverse":
+                    this.currentRandomFunc = this.calcSqrtInverse;
+                    break;
+                case "normal":
                     this.currentRandomFunc = this.calcNormalRandom;
                     break;
                 default:
@@ -85,7 +98,6 @@ var demo;
             this.reset();
             this._isCalculating = true;
         };
-        //
         Main.prototype.calcRandom = function () {
             // 通常の乱数
             var value = Math.random();
@@ -101,15 +113,37 @@ var demo;
             var value = Math.random() * Math.random();
             return value;
         };
+        Main.prototype.calcMultiplyInverse = function () {
+            // 乗算の乱数
+            var base = Math.random() * Math.random();
+            // 反転
+            var value = 1.0 - base;
+            return value;
+        };
         Main.prototype.calcSquareRandom = function () {
             // 2乗の乱数
             var r = Math.random();
             var value = r * r;
             return value;
         };
+        Main.prototype.calcSquareInverse = function () {
+            // 2乗の乱数
+            var r = Math.random();
+            var base = r * r;
+            // 反転
+            var value = 1.0 - base;
+            return value;
+        };
         Main.prototype.calcSqrtRandom = function () {
             // 平方根の乱数
             var value = Math.sqrt(Math.random());
+            return value;
+        };
+        Main.prototype.calcSqrtInverse = function () {
+            // 平方根の乱数
+            var base = Math.sqrt(Math.random());
+            // 反転
+            var value = 1.0 - base;
             return value;
         };
         Main.prototype.calcNormalRandom = function () {
@@ -131,6 +165,11 @@ var demo;
                     break;
                 }
             }
+            return value;
+        };
+        Main.prototype.calcInverse = function (randomValue) {
+            // 平方根の乱数
+            var value = 1.0 - randomValue;
             return value;
         };
         Main.prototype.createGraph = function () {
@@ -170,7 +209,6 @@ var demo;
         };
         Main.GRAPH_WIDTH = 400;
         Main.GRAPH_HEIGHT = 400;
-        Main.NUM_LOGIC = 6;
         return Main;
     }());
 })(demo || (demo = {}));
