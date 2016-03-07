@@ -172,6 +172,5 @@ var demo;
         Main.GRAPH_HEIGHT = 400;
         Main.NUM_LOGIC = 6;
         return Main;
-    })();
+    }());
 })(demo || (demo = {}));
-//# sourceMappingURL=main.js.map

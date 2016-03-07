@@ -17,6 +17,7 @@ body {
     justify-content: center; /* 横方向中央揃え */
 
     background: #222;
+    overflow: hidden;
 }
 
 .graff {
@@ -44,7 +45,6 @@ div#ui {
     -moz-user-select: none; /* Firefox */
     -webkit-user-select: none; /* Safari、Chromeなど */
     -ms-user-select: none; /* IE10かららしい */
-    z-index: 100;
 }
 
 div#btnPrev, div#btnNext {
@@ -64,11 +64,11 @@ div#btnNext:active, div#btnPrev:active {
 }
 
 div#btnNext {
-    right: 0px;
+    right: 0;
 }
 
 div#btnPrev {
-    left: 0px;
+    left: 0;
 }
 
 div#numParticle {
@@ -78,7 +78,7 @@ div#numParticle {
     width: 100%;
     height: 64px;
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 0;
     text-align: center;
 }
