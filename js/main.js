@@ -90,6 +90,9 @@ class Main {
       case 'multiply-inverse':
         this.currentRandomFunc = this.calcMultiplyInverse;
         break;
+        case 'multiply-reflect':
+        this.currentRandomFunc = this.calcMultiplyReflect;
+        break;
       case 'square':
         this.currentRandomFunc = this.calcSquareRandom;
         break;
@@ -135,6 +138,17 @@ class Main {
     const base = Math.random() * Math.random();
     // 反転
     const value = 1.0 - base;
+    return value;
+  }
+
+  calcMultiplyReflect() {
+    // 乗算の乱数
+    const base = Math.random() * Math.random();
+    // 反転
+    const inverse = 1.0 - base;
+
+    const value = Math.random() < 0.5 ? base : inverse;
+
     return value;
   }
 
