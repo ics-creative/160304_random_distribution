@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=960">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=980, initial-scale=1"/>
+  <meta name="google" content="notranslate"/>
+
   <title>Random Distribution Demo - ICS</title>
-  <script src="https://code.createjs.com/createjs-2015.11.26.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script defer src="js/main.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="graff">
-    <canvas id="myCanvas" width="480" height="480"></canvas>
-    <div id="ui">
-      <div id="numParticle">
-        <select id="selectBox">
-          <option value="default">通常の乱数</option>
-          <option value="add">乱数の加算</option>
-          <option value="multiply">乱数の乗算</option>
-          <option value="multiply-inverse">乱数の乗算(反転)</option>
-          <option value="square">乱数の2乗</option>
-          <option value="square-inverse">乱数の2乗(反転)</option>
-          <option value="sqrt">乱数の平方根</option>
-          <option value="sqrt-inverse">乱数の平方根(反転)</option>
-          <option value="normal">正規乱数</option>
-        </select>
-      </div>
-      <div id="btnPrev">&laquo;</div>
-      <div id="btnNext">&raquo;</div>
+    <canvas id="myCanvas" width="1920" height="1080"></canvas>
+  </div>
+
+  <div id="ui">
+    <div id="numParticle">
+      <select id="selectBox">
+        <option value="default">通常の乱数</option>
+        <option value="add">乱数の加算</option>
+        <option value="multiply">乱数の乗算</option>
+        <option value="multiply-inverse">乱数の乗算(反転)</option>
+        <option value="square">乱数の2乗</option>
+        <option value="square-inverse">乱数の2乗(反転)</option>
+        <option value="sqrt">乱数の平方根</option>
+        <option value="sqrt-inverse">乱数の平方根(反転)</option>
+        <option value="normal">正規乱数</option>
+      </select>
     </div>
+    <div id="btnPrev">&laquo;</div>
+    <div id="btnNext">&raquo;</div>
   </div>
 </body>
 </html>
