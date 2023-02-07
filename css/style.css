@@ -11,6 +11,12 @@ body {
   background-color: black;
 }
 
+button {
+  appearance: none;
+  border: none;
+  background: none;
+}
+
 .graff {
 
   position: absolute;
@@ -31,7 +37,7 @@ body {
   height: 540px;
 }
 
-div#ui {
+#ui {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -41,7 +47,7 @@ div#ui {
   user-select: none; /* CSS3 */
 }
 
-div#btnPrev, div#btnNext {
+#btnPrev, #btnNext {
   position: absolute;
   top: 0;
   width: 64px;
@@ -53,19 +59,19 @@ div#btnPrev, div#btnNext {
   cursor: pointer;
 }
 
-div#btnNext:active, div#btnPrev:active {
+#btnNext:active, #btnPrev:active {
   background: #2980b9;
 }
 
-div#btnNext {
+#btnNext {
   right: 0;
 }
 
-div#btnPrev {
+#btnPrev {
   left: 0;
 }
 
-div#numParticle {
+#numParticle {
   font-size: 200%;
   color: #fff;
   background: #34495e;
