@@ -187,7 +187,7 @@ class Main {
       // 正規乱数
       const r1 = Math.random();
       const r2 = Math.random();
-      var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+      let value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
       // 値を0以上1未満になるよう正規化する
       value = (value + 3) / 6;
       return value;
